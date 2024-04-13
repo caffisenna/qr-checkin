@@ -1,66 +1,46 @@
-<!-- Name Field -->
-<div class="col-sm-12">
-    {!! Form::label('name', '氏名:') !!}
-    <p>{{ $participants->name }}</p>
-</div>
+<table class="uk-table uk-table-striped">
+    <tr>
+        <th>氏名</th>
+        <td>{{ $participants->name }}</td>
+    </tr>
+    <tr>
+        <th>登録番号</th>
+        <td>{{ $participants->bsid }}</td>
+    </tr>
+    <tr>
+        <th>UUID</th>
+        <td>{{ $participants->uuid }}</td>
+    </tr>
+    <tr>
+        <th>県連・地区</th>
+        <td>{{ $participants->prefecture }} {{ $participants->district }}</td>
+    </tr>
+    <tr>
+        <th>役務</th>
+        <td>{{ $participants->role }}</td>
+    </tr>
 
-<!-- BSID Field -->
-<div class="col-sm-12">
-    {!! Form::label('bsid', '登録番号:') !!}
-    <p>{{ $participants->bsid }}</p>
-</div>
+    @php
+        $fields = [
+            ['label' => '自由フィールド1', 'value' => $participants->field1],
+            ['label' => '自由フィールド2', 'value' => $participants->field2],
+            ['label' => '自由フィールド3', 'value' => $participants->field3],
+        ];
+    @endphp
 
-<!-- Uuid Field -->
-<div class="col-sm-12">
-    {!! Form::label('uuid', 'UUID:') !!}
-    <p>{{ $participants->uuid }}</p>
-</div>
+    @foreach ($fields as $field)
+        <tr>
+            <th>{{ $field['label'] }}</th>
+            <td>{{ $field['value'] }}</td>
+        </tr>
+    @endforeach
 
-<!-- Prefecture Field -->
-<div class="col-sm-12">
-    {!! Form::label('prefecture', '県連:') !!}
-    <p>{{ $participants->prefecture }}</p>
-</div>
-
-<!-- District Field -->
-<div class="col-sm-12">
-    {!! Form::label('district', '地区:') !!}
-    <p>{{ $participants->district }}</p>
-</div>
-
-<!-- Role Field -->
-<div class="col-sm-12">
-    {!! Form::label('role', '役務:') !!}
-    <p>{{ $participants->role }}</p>
-</div>
-
-<!-- Field1 Field -->
-<div class="col-sm-12">
-    {!! Form::label('field1', '自由フィールド:') !!}
-    <p>{{ $participants->field1 }}</p>
-</div>
-
-<!-- Field2 Field -->
-<div class="col-sm-12">
-    {!! Form::label('field2', '自由フィールド2:') !!}
-    <p>{{ $participants->field2 }}</p>
-</div>
-
-<!-- Field3 Field -->
-<div class="col-sm-12">
-    {!! Form::label('field3', '自由フィールド3:') !!}
-    <p>{{ $participants->field3 }}</p>
-</div>
-
-<!-- Event Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('event_id', 'イベントID:') !!}
-    <p>{{ $participants->event_id }}</p>
-</div>
-
-<!-- チェックイン Field -->
-<div class="col-sm-12">
-    {!! Form::label('checked_in_at', 'チェックイン:') !!}
-    <p>{{ $participants->checked_in_at }}</p>
-</div>
-
+    <tr>
+        <th>イベントID</th>
+        <td>{{ $participants->event_id }}</td>
+    </tr>
+    <tr>
+        <th>チェックイン</th>
+        <td>{{ $participants->checked_in_at }}</td>
+    </tr>
+</table>
