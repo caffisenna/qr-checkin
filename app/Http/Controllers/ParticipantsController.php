@@ -180,7 +180,8 @@ class ParticipantsController extends AppBaseController
             Participants::create($input);
         }
 
-        return redirect()->back()->with('success', 'File uploaded and data inserted successfully.');
+        Flash::success('参加者を登録しました。当該イベントの参加者一覧で確認してください');
+        return redirect()->back();
     }
 
     private function parseFile($filePath)
