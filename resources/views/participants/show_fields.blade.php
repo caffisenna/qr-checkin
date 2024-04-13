@@ -1,15 +1,15 @@
 <table class="uk-table uk-table-striped">
     <tr>
+        <th>イベント名</th>
+        <td>{{ $participants->event->name }}</td>
+    </tr>
+    <tr>
         <th>氏名</th>
         <td>{{ $participants->name }}</td>
     </tr>
     <tr>
         <th>登録番号</th>
         <td>{{ $participants->bsid }}</td>
-    </tr>
-    <tr>
-        <th>UUID</th>
-        <td>{{ $participants->uuid }}</td>
     </tr>
     <tr>
         <th>県連・地区</th>
@@ -36,11 +36,16 @@
     @endforeach
 
     <tr>
-        <th>イベントID</th>
-        <td>{{ $participants->event_id }}</td>
+        <th>チェックイン</th>
+        <td>
+            @if (isset($participants->checked_in_at))
+                {{ $participants->checked_in_at->format('Y-m-d') }}
+            @else
+            @endif
+        </td>
     </tr>
     <tr>
-        <th>チェックイン</th>
-        <td>{{ $participants->checked_in_at }}</td>
+        <th>個人識別ID</th>
+        <td>{{ $participants->uuid }}</td>
     </tr>
 </table>
