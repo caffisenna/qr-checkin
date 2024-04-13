@@ -35,7 +35,7 @@ class ParticipantsController extends AppBaseController
         if (isset($event_id)) {
             $participants = Participants::where('event_id', $event_id)->with('event')->get();
         } else {
-            $participants = Participants::with('event')->paginate(100);
+            $participants = Participants::with('event')->get();
         }
 
         // $events = Events::all();

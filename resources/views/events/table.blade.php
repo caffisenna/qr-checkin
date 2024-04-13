@@ -6,6 +6,7 @@
                     <th>カテゴリ</th>
                     <th>イベント</th>
                     <th>開催日</th>
+                    <th>人数</th>
                     <th>県連</th>
                     <th>地区</th>
                     <th colspan="3">操作</th>
@@ -18,6 +19,13 @@
                         <td><a href="{{ route('events.show', [$events->uuid]) }}" class=''>{{ $events->name }}</a>
                         </td>
                         <td>{{ $events->date->format('Y-m-d') }}</td>
+                        <td>
+                            @foreach ($participantCounts as $count)
+                                @if ($count->event_id === $events->uuid)
+                                    {{ $count->count }}
+                                @endif
+                            @endforeach
+                        </td>
                         <td>{{ $events->prefecture }}</td>
                         <td>{{ $events->district }}</td>
                         <td style="width: 120px">

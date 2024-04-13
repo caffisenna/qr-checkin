@@ -29,8 +29,13 @@ class EventsController extends AppBaseController
     {
         $events = $this->eventsRepository->paginate(10);
 
+        // イベント別人数カウント
+        $participantCounts = Participants::selectRaw('event_id, count(*) as count')
+            ->groupBy('event_id')
+            ->get();
+
         return view('events.index')
-            ->with('events', $events);
+            ->with(compact('events', 'participantCounts'));
     }
 
     /**
