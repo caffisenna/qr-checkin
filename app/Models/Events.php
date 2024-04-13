@@ -37,13 +37,17 @@ class Events extends Model
     ];
 
     public static array $messages = [
-        'category.required'=>'カテゴリを選択してください',
-        'name.required'=>'イベント名を入力してください',
-        'date.required'=>'開催日を入力してください',
+        'category.required' => 'カテゴリを選択してください',
+        'name.required' => 'イベント名を入力してください',
+        'date.required' => '開催日を入力してください',
         // 'uuid' => 'required',
         // 'prefecture' => 'required',
         // 'district' => 'required'
     ];
 
-
+    // relation
+    public function participant()
+    {
+        return $this->hasOne(Participants::class, 'event_id', 'uuid');
+    }
 }

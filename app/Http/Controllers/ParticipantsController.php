@@ -76,7 +76,7 @@ class ParticipantsController extends AppBaseController
     public function show($id)
     {
         // $participants = $this->participantsRepository->find($id);
-        $participants = Participants::where('uuid', $id)->first();
+        $participants = Participants::where('uuid', $id)->with('event')->first();
 
         if (empty($participants)) {
             Flash::error('Participants not found');

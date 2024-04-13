@@ -50,5 +50,10 @@ class Participants extends Model
         'bsid.required' => '登録番号なし',
     ];
 
+    // relation
+    public function event()
+    {
+        return $this->belongsTo(Events::class, 'event_id', 'uuid');
+    }
 
 }
