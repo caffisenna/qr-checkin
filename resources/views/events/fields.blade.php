@@ -13,7 +13,7 @@
 <!-- Date Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('date', '開催日:') !!}
-    {!! Form::text('date', null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::date('date', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
 <!-- Prefecture Field -->
