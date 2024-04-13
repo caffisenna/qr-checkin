@@ -147,7 +147,6 @@ class EventsController extends AppBaseController
         } elseif ($request->isMethod('post')) {
             $bsid = $request->input('bsid');
             $bsid = str_replace('saj://', '', $bsid);
-            // dd($bsid);
             $event_id = $request['event_id'];
 
             // 対象者サーチ
