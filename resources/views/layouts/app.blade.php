@@ -156,8 +156,9 @@
     </script>
 
     @stack('third_party_scripts')
-    <!-- UIkit CSS -->
-    <link rel="stylesheet" href="{{ asset('/uikit/uikit.min.css') }}" />
+    <!-- UIkit JS -->
+    <script src="{{ asset('/js/uikit.min.js') }}"></script>
+    <script src="{{ asset('/js/uikit-icons.min.js') }}"></script>
     @stack('page_scripts')
 </body>
 
