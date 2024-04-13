@@ -11,3 +11,11 @@
         <p>参加者</p>
     </a>
 </li>
+
+
+<li class="nav-item">
+    <a href="{{ route('download') }}" class="nav-link {{ Request::is('download') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-home"></i>
+        <p>ダウンロード</p>
+    </a>
+</li>
