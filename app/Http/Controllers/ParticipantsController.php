@@ -33,15 +33,15 @@ class ParticipantsController extends AppBaseController
     {
         $event_id = $request['event_id'];
         if (isset($event_id)) {
-            $participants = Participants::where('event_id', $event_id)->get();
+            $participants = Participants::where('event_id', $event_id)->with('event')->get();
         } else {
-            $participants = $this->participantsRepository->paginate(100);
+            $participants = Participants::with('event')->paginate(100);
         }
 
-        $events = Events::all();
+        // $events = Events::all();
 
         return view('participants.index')
-            ->with(compact('participants', 'events'));
+            ->with(compact('participants'));
     }
 
     /**

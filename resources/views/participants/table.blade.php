@@ -22,12 +22,7 @@
                         <td>{{ $participants->district }}</td>
                         <td>{{ $participants->role }}</td>
                         <td>
-                            @foreach ($events as $event)
-                                @if ($event->uuid === $participants->event_id)
-                                    {{ $event->name }}
-                                @endif
-                            @endforeach
-                            {{-- {{ $participants->event_id }} --}}
+                            {{ $participants->event->name }}
                         </td>
                         <td>
                             @if ($participants->checked_in_at)
