@@ -11,6 +11,10 @@ use App\Repositories\ParticipantsRepository;
 use Illuminate\Http\Request;
 use Flash;
 use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\ParticipantImport;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class ParticipantsController extends AppBaseController
 {
@@ -96,7 +100,9 @@ class ParticipantsController extends AppBaseController
             return redirect(route('participants.index'));
         }
 
-        return view('participants.edit')->with('participants', $participants);
+        $events = Events::all();
+
+        return view('participants.edit')->with(compact('participants', 'events'));
     }
 
     /**
@@ -139,5 +145,63 @@ class ParticipantsController extends AppBaseController
         Flash::success('参加者を削除しました');
 
         return redirect(route('participants.index'));
+    }
+
+    public function upload_view(Request $request)
+    {
+        // upload画面に遷移
+        $uuid = $request['event_id'];
+
+        // イベント名、uuidを取得してviewに渡す
+        $event = Events::where('uuid', $uuid)->first();
+
+        return view('upload')->with(compact('event'));
+    }
+
+    public function upload(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:xlsx,csv|max:2048', // Assuming max file size is 2MB
+        ]);
+
+        // Save uploaded file
+        $file = $request->file('file');
+        $fileName = time() . '_' . $file->getClientOriginalName();
+        $file->storeAs('uploads', $fileName);
+
+        // Process uploaded file
+        $filePath = storage_path('app/uploads/' . $fileName);
+        $data = $this->parseFile($filePath);
+
+        // Insert records into database
+        foreach ($data as $input) {
+            $input['uuid'] = Uuid::uuid4()->toString(); // Generate UUID
+            $input['event_id'] = $request['event_id'];
+            Participants::create($input);
+        }
+
+        return redirect()->back()->with('success', 'File uploaded and data inserted successfully.');
+    }
+
+    private function parseFile($filePath)
+    {
+        $data = [];
+        // Assuming first row contains headers
+        $headers = ['name', 'bsid', 'prefecture', 'district', 'role', 'field1', 'field2', 'field3'];
+
+        $spreadsheet = IOFactory::load($filePath);
+        $worksheet = $spreadsheet->getActiveSheet();
+
+        foreach ($worksheet->getRowIterator() as $row) {
+            $rowData = [];
+            foreach ($row->getCellIterator() as $cell) {
+                $rowData[] = $cell->getValue();
+            }
+            // Fill missing values with null to ensure equal length of $headers and $rowData
+            $filledRow = array_pad($rowData, count($headers), null);
+            $data[] = array_combine($headers, $filledRow);
+        }
+
+        return $data;
     }
 }

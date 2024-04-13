@@ -8,6 +8,7 @@
                     <th>地区</th>
                     <th>役務</th>
                     <th>イベント</th>
+                    <th>チェックイン</th>
                     <th colspan="3">操作</th>
                 </tr>
             </thead>
@@ -27,6 +28,11 @@
                                 @endif
                             @endforeach
                             {{-- {{ $participants->event_id }} --}}
+                        </td>
+                        <td>
+                            @if ($participants->checked_in_at)
+                                済
+                            @endif
                         </td>
                         <td style="width: 120px">
                             {!! Form::open(['route' => ['participants.destroy', $participants->id], 'method' => 'delete']) !!}

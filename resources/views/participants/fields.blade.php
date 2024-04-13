@@ -55,14 +55,20 @@
     {!! Form::text('field3', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Event Id Field -->
+
 <div class="form-group col-sm-6">
     {!! Form::label('event_id', 'イベント:') !!}
     {{-- {!! Form::text('event_id', null, ['class' => 'form-control']) !!} --}}
     <select name="event_id" id="" class="form-control">
         <option value=""></option>
         @foreach ($events as $event)
-            <option value="{{ $event->uuid }}">{{ $event->name }}</option>
+            @if (isset($participants))
+                <option value="{{ $event->uuid }}" {{ $event->uuid == $participants->event_id ? 'selected' : '' }}>
+                    {{ $event->name }}</option>
+            @else
+                <option value="{{ $event->uuid }}">
+                    {{ $event->name }}</option>
+            @endif
         @endforeach
     </select>
 </div>

@@ -6,6 +6,7 @@ use App\Http\Requests\CreateEventsRequest;
 use App\Http\Requests\UpdateEventsRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Events;
+use App\Models\Participants;
 use App\Repositories\EventsRepository;
 use Illuminate\Http\Request;
 use Flash;
@@ -130,5 +131,28 @@ class EventsController extends AppBaseController
         Flash::success('イベントを削除しました');
 
         return redirect(route('events.index'));
+    }
+
+
+    public function checkin(Request $request)
+    {
+        if ($request->isMethod('get')) {
+            $event = Events::where('uuid', $request['event_id'])->first();
+            return view('checkin')->with(compact('event'));
+        } elseif ($request->isMethod('post')) {
+            $bsid = $request->input('bsid');
+            $bsid = str_replace('saj://', '', $bsid);
+            // dd($bsid);
+            $event_id = $request['event_id'];
+
+            // 対象者サーチ
+            $user = Participants::where('bsid', $bsid)->where('event_id', $event_id)->firstorfail();
+            if ($user) {
+                $user->checked_in_at = now();
+                $user->save();
+                $event = Events::where('uuid', $event_id)->first();
+                return view('checkin')->with(compact('user', 'event'));
+            }
+        }
     }
 }

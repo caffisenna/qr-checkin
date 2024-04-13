@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('participants', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('bsid',11)->unique();
+            $table->string('bsid',11); // ユニークは撤廃 複数イベに登録もあり得る
             $table->string('uuid')->unique();
             $table->string('event_id')->nullable();
             $table->string('prefecture')->nullable();
