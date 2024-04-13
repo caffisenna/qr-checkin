@@ -34,3 +34,7 @@ Route::post('/upload', [App\Http\Controllers\ParticipantsController::class, 'upl
 
 // チェックイン
 Route::match(['get', 'post'], '/checkin', [App\Http\Controllers\EventsController::class, 'checkin'])->name('checkin');
+
+
+// ダウンロード
+Route::get('/download', [App\Http\Controllers\DownloadController::class, 'download'])->name('download');
