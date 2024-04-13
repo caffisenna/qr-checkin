@@ -28,7 +28,7 @@
         </div>
     </div>
     <ul>
-        <li><a href="{{ route('checkin', ['event_id' => $events->uuid]) }}">チェックイン</a></li>
+        <li><a href="{{ route('checkin', ['event_id' => $events->uuid]) }}">QRスキャン</a></li>
         <li><a href="{{ route('participants.index', ['event_id' => $events->uuid]) }}">参加者一覧</a></li>
         <li><a href="{{ route('upload_view', ['event_id' => $events->uuid]) }}">参加者登録</a></li>
     </ul>
