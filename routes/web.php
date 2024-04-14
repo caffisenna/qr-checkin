@@ -38,3 +38,6 @@ Route::match(['get', 'post'], '/checkin', [App\Http\Controllers\EventsController
 
 // ダウンロード
 Route::get('/download', [App\Http\Controllers\DownloadController::class, 'download'])->name('download');
+
+// 使い方
+Route::get('/usage', [App\Http\Controllers\UsageController::class, 'usage'])->name('usage');

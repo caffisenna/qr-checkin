@@ -19,3 +19,10 @@
         <p>ダウンロード</p>
     </a>
 </li>
+
+<li class="nav-item">
+    <a href="{{ route('usage') }}" class="nav-link {{ Request::is('usage') ? 'active' : '' }}">
+        <span uk-icon="icon: file-text"></span>
+        <p>使い方ガイド</p>
+    </a>
+</li>
