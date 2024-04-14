@@ -154,8 +154,13 @@ class EventsController extends AppBaseController
             if ($user) {
                 $user->checked_in_at = now();
                 $user->save();
-                $event = Events::where('uuid', $event_id)->first();
-                return view('checkin')->with(compact('user', 'event'));
+                if (($request['redirect'] == 'true')) {
+                    Flash::success($user->name . 'さんをチェックインしました');
+                    return back();
+                } else {
+                    $event = Events::where('uuid', $event_id)->first();
+                    return view('checkin')->with(compact('user', 'event'));
+                }
             }
         }
     }
