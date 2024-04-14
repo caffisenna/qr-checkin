@@ -21,8 +21,8 @@
                         <td>{{ $participants->prefecture }}</td>
                         <td>{{ $participants->district }}</td>
                         <td>{{ $participants->role }}</td>
-                        <td>
-                            {{ $participants->event->name }}
+                        <td><a
+                                href="{{ route('events.show', ['event' => $participants->event_id]) }}">{{ $participants->event->name }}</a>
                         </td>
                         <td>
                             @if ($participants->checked_in_at)
