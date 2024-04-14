@@ -21,7 +21,7 @@
 
 <!-- Prefecture Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('prefecture', '県連:') !!}
+    {!! Form::label('prefecture', '県連盟:') !!}
     {!! Form::text('prefecture', null, ['class' => 'form-control', 'required']) !!}
 </div>
 
