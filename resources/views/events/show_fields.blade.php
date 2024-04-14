@@ -12,6 +12,14 @@
         <td>{{ $events->date->format('Y-m-d') }}</td>
     </tr>
     <tr>
+        <th>申込人数</th>
+        <td>{{ $totalMembersCount }} 人</td>
+    </tr>
+    <tr>
+        <th>チェックイン人数</th>
+        <td>{{ $checkedInCount }}人</td>
+    </tr>
+    <tr>
         <th>イベントID</th>
         <td>{{ $events->uuid }}</td>
     </tr>

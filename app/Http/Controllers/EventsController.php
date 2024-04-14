@@ -68,16 +68,19 @@ class EventsController extends AppBaseController
      */
     public function show($id)
     {
-        // $events = $this->eventsRepository->find($id);
         $events = Events::where('uuid', $id)->first();
+
+        $members = Participants::where('event_id', $id)->get();
+
+        $checkedInCount = $members->whereNotNull('checked_in_at')->count();
+        $totalMembersCount = $members->count();
 
         if (empty($events)) {
             Flash::error('Events not found');
-
             return redirect(route('events.index'));
         }
 
-        return view('events.show')->with('events', $events);
+        return view('events.show')->with(compact('events', 'checkedInCount', 'totalMembersCount'));
     }
 
     /**
