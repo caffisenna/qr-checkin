@@ -53,18 +53,19 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var bsidInput = document.getElementById('bsid');
-        bsidInput.focus();
-    });
 
-    document.addEventListener('DOMContentLoaded', function() {
-        var bsidInput = document.getElementById('bsid');
+        bsidInput.focus();
+
+        bsidInput.addEventListener('blur', function() {
+            bsidInput.focus();
+        });
+
         bsidInput.addEventListener('input', function() {
             var inputValue = bsidInput.value;
+
             if (inputValue.startsWith('saj://') && inputValue.length === 17) {
-                // 11桁の整数が入力されたら
                 bsidInput.form.submit();
             }
         });
-        bsidInput.focus();
     });
 </script>
