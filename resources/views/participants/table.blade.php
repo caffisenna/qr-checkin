@@ -26,7 +26,7 @@
                         </td>
                         <td>
                             @if ($participants->checked_in_at)
-                                済 <span class="uk-text-small uk-text-danger">[取消]</span>
+                                済
                             @else
                                 <form
                                     action="{{ route('checkin', ['bsid' => $participants->bsid, 'event_id' => $participants->event->uuid, 'redirect' => 'true']) }}"
