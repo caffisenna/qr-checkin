@@ -41,6 +41,7 @@
             @if (isset($participants->checked_in_at))
                 {{ $participants->checked_in_at->format('Y-m-d') }}
             @else
+                <a href="#" class="uk-button uk-button-primary">IN!</a>
             @endif
         </td>
     </tr>
