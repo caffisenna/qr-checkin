@@ -7,6 +7,7 @@
         </div>
     </div>
     <p>参加者情報の入力されたエクセルファイルをアップロードして一括登録します。(ファイルサイズ最大2MB)</p>
+    <p class=""><a href="{{ route('download') }}">テンプレートのダウンロード</a></p>
     @include('flash::message')
     <form action="{{ route('upload') }}" method="POST" enctype="multipart/form-data">
         @csrf
