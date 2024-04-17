@@ -6,6 +6,7 @@
             <h2>チェックイン: {{ $event->name }}</h2>
         </div>
     </div>
+    @include('flash::message')
     <form action="{{ route('checkin') }}" method="POST">
         @csrf
         <input type="text" name="bsid" id="bsid" class="uk-input uk-form-large" onkeyup="validateAndSubmit(this)">

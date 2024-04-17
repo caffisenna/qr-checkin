@@ -155,17 +155,25 @@ class EventsController extends AppBaseController
             $event_id = $request['event_id'];
 
             // 対象者サーチ
-            $user = Participants::where('bsid', $bsid)->where('event_id', $event_id)->firstorfail();
-            if ($user) {
-                $user->checked_in_at = now();
-                $user->save();
-                if (($request['redirect'] == 'true')) {
-                    Flash::success($user->name . 'さんをチェックインしました');
-                    return back();
+            try {
+                $user = Participants::where('bsid', $bsid)->where('event_id', $event_id)->first();
+                if ($user) {
+                    $user->checked_in_at = now();
+                    $user->save();
+                    if ($request->input('redirect') == 'true') {
+                        Flash::success($user->name . 'さんをチェックインしました');
+                        return back();
+                    } else {
+                        $event = Events::where('uuid', $event_id)->first();
+                        return view('checkin')->with(compact('user', 'event'));
+                    }
                 } else {
-                    $event = Events::where('uuid', $event_id)->first();
-                    return view('checkin')->with(compact('user', 'event'));
+                    Flash::error('対象の登録番号が見つかりません ' . $bsid);
+                    return back()->with('error', 'レコードが見つかりませんでした。')->withInput(request()->all());
                 }
+            } catch (Exception $e) {
+                // その他の例外が発生した場合の処理
+                return back()->with('error', '予期せぬエラーが発生しました。')->withInput(request()->all());
             }
         }
     }
