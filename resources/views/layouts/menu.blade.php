@@ -16,7 +16,7 @@
 <li class="nav-item">
     <a href="{{ route('download') }}" class="nav-link {{ Request::is('download') ? 'active' : '' }}">
         <span uk-icon="icon: download"></span>
-        <p>ダウンロード</p>
+        <p>ダウンロード12</p>
     </a>
 </li>
 
