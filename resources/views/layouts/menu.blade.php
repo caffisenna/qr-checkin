@@ -1,7 +1,7 @@
 <li class="nav-item">
     <a href="{{ route('events.index') }}" class="nav-link {{ Request::is('events*') ? 'active' : '' }}">
         <span uk-icon="icon: list"></span>
-        <p>イベント1</p>
+        <p>イベント123</p>
     </a>
 </li>
 
