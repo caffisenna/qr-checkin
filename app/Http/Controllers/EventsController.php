@@ -136,7 +136,7 @@ class EventsController extends AppBaseController
 
         $this->eventsRepository->delete($id);
 
-        Flash::success('イベントを削除しました');
+        Flash::success('イベントを削除しました1');
 
         return redirect(route('events.index'));
     }
