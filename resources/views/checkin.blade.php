@@ -8,7 +8,7 @@
     </div>
     <form action="{{ route('checkin') }}" method="POST">
         @csrf
-        <input type="text" name="bsid" id="bsid" class="uk-input uk-form-large">
+        <input type="text" name="bsid" id="bsid" class="uk-input uk-form-large" onkeyup="validateAndSubmit(this)">
         {!! Form::hidden('event_id', $event->uuid) !!}
     </form>
 
@@ -68,4 +68,14 @@
             }
         });
     });
+
+    // auto submit
+    function validateAndSubmit(input) {
+        const value = input.value;
+        const lastDigits = value.slice(-11);
+
+        if (/^\d{11}$/.test(lastDigits)) {
+            input.form.submit();
+        }
+    }
 </script>
