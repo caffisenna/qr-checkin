@@ -149,8 +149,9 @@ class EventsController extends AppBaseController
             return view('checkin')->with(compact('event'));
         } elseif ($request->isMethod('post')) {
             $bsid = $request->input('bsid');
+
+            // 受け取ったrequestの末尾11桁を取得
             $bsid = substr($bsid, -11);
-            dd($bsid);
             $event_id = $request['event_id'];
 
             // 対象者サーチ
