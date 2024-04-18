@@ -9,7 +9,6 @@
                     <th>役務</th>
                     <th>イベント</th>
                     <th>チェックイン</th>
-                    <th colspan="3">操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,21 +34,6 @@
                                     <button type="submit" class="uk-button uk-button-primary">IN!</button>
                                 </form>
                             @endif
-                        </td>
-                        <td style="width: 120px">
-                            {!! Form::open(['route' => ['participants.destroy', $participants->id], 'method' => 'delete']) !!}
-                            <div class='btn-group'>
-                                <a href="{{ route('participants.edit', [$participants->id]) }}"
-                                    class='btn btn-default btn-xs'>
-                                    <i class="far fa-edit"></i>
-                                </a>
-                                {!! Form::button('<i class="far fa-trash-alt"></i>', [
-                                    'type' => 'submit',
-                                    'class' => 'btn btn-danger btn-xs',
-                                    'onclick' => "return confirm('本当に削除しますか?')",
-                                ]) !!}
-                            </div>
-                            {!! Form::close() !!}
                         </td>
                     </tr>
                 @endforeach

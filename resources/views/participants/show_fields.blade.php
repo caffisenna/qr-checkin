@@ -49,4 +49,20 @@
         <th>個人識別ID</th>
         <td>{{ $participants->uuid }}</td>
     </tr>
+    <tr>
+        <th>操作</th>
+        <td>
+            <a href="{{ route('participants.edit', [$participants->id]) }}" class='uk-button uk-button-default'>
+                編集
+            </a>
+            {!! Form::open(['route' => ['participants.destroy', $participants->id], 'method' => 'delete']) !!}
+            {!! Form::button('削除', [
+                'type' => 'submit',
+                'class' => 'uk-button uk-button-danger',
+                'onclick' => "return confirm('本当に削除しますか?')",
+            ]) !!}
+            {!! Form::close() !!}
+        </td>
+
+    </tr>
 </table>
