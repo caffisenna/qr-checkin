@@ -188,7 +188,7 @@ class ParticipantsController extends AppBaseController
     {
         $data = [];
         // Assuming first row contains headers
-        $headers = ['name', 'bsid', 'prefecture', 'district', 'role', 'field1', 'field2', 'field3'];
+        $headers = ['name', 'furigana', 'bsid', 'prefecture', 'district', 'role', 'field1', 'field2', 'field3'];
 
         $spreadsheet = IOFactory::load($filePath);
         $worksheet = $spreadsheet->getActiveSheet();

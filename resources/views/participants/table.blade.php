@@ -12,23 +12,27 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($participants as $participants)
+                @foreach ($participants as $participant)
                     <tr>
-                        <td><a href="{{ route('participants.show', [$participants->uuid]) }}"
-                                class=''>{{ $participants->name }}
-                            </a></td>
-                        <td>{{ $participants->prefecture }}</td>
-                        <td>{{ $participants->district }}</td>
-                        <td>{{ $participants->role }}</td>
+                        <td><a href="{{ route('participants.show', [$participant->uuid]) }}"
+                                class=''>{{ $participant->name }}
+                            </a>
+                            @if ($participant->furigana)
+                                <br>{{ $participant->furigana }}
+                            @endif
+                        </td>
+                        <td>{{ $participant->prefecture }}</td>
+                        <td>{{ $participant->district }}</td>
+                        <td>{{ $participant->role }}</td>
                         <td><a
-                                href="{{ route('events.show', ['event' => $participants->event_id]) }}">{{ $participants->event->name }}</a>
+                                href="{{ route('events.show', ['event' => $participant->event_id]) }}">{{ $participant->event->name }}</a>
                         </td>
                         <td>
-                            @if ($participants->checked_in_at)
+                            @if ($participant->checked_in_at)
                                 済
                             @else
                                 <form
-                                    action="{{ route('checkin', ['bsid' => $participants->bsid, 'event_id' => $participants->event->uuid, 'redirect' => 'true']) }}"
+                                    action="{{ route('checkin', ['bsid' => $participant->bsid, 'event_id' => $participant->event->uuid, 'redirect' => 'true']) }}"
                                     method="POST" onsubmit="return confirm('チェックインしてよろしいですか?');">
                                     @csrf
                                     <button type="submit" class="uk-button uk-button-primary">IN!</button>

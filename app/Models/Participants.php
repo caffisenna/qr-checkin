@@ -10,6 +10,7 @@ class Participants extends Model
 
     public $fillable = [
         'name',
+        'furigana',
         'uuid',
         'prefecture',
         'district',
@@ -25,6 +26,7 @@ class Participants extends Model
     protected $casts = [
         'id' => 'integer',
         'name' => 'string',
+        'furigana' => 'string',
         'uuid' => 'string',
         'prefecture' => 'string',
         'district' => 'string',

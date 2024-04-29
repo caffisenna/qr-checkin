@@ -5,7 +5,15 @@
     </tr>
     <tr>
         <th>氏名</th>
-        <td>{{ $participants->name }}</td>
+        <td>
+            {{ $participants->name }}
+        </td>
+    </tr>
+    <tr>
+        <th>フリガナ</th>
+        <td>
+            {{ $participants->furigana }}
+        </td>
     </tr>
     <tr>
         <th>登録番号</th>
