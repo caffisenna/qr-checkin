@@ -5,6 +5,11 @@
 </div>
 
 <div class="form-group col-sm-6">
+    {!! Form::label('furigana', 'フリガナ:') !!}
+    {!! Form::text('furigana', null, ['class' => 'form-control',]) !!}
+</div>
+
+<div class="form-group col-sm-6">
     {!! Form::label('bsid', '登録番号:') !!}
     {!! Form::text('bsid', null, [
         'class' => 'form-control',
@@ -22,19 +27,19 @@
 <!-- Prefecture Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('prefecture', '県連盟:') !!}
-    {!! Form::text('prefecture', null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::text('prefecture', null, ['class' => 'form-control',]) !!}
 </div>
 
 <!-- District Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('district', '地区:') !!}
-    {!! Form::text('district', null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::text('district', null, ['class' => 'form-control',]) !!}
 </div>
 
 <!-- Role Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('role', '役務:') !!}
-    {!! Form::text('role', null, ['class' => 'form-control', 'required']) !!}
+    {!! Form::text('role', null, ['class' => 'form-control',]) !!}
 </div>
 
 <!-- Field1 Field -->

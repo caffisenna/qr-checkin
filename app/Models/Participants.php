@@ -42,9 +42,9 @@ class Participants extends Model
     public static array $rules = [
         'name' => 'required',
         // 'uuid' => 'required',
-        'prefecture' => 'required',
-        'district' => 'required',
-        'role' => 'required',
+        // 'prefecture' => 'required',
+        // 'district' => 'required',
+        // 'role' => 'required',
         'bsid' => 'required',
     ];
 
