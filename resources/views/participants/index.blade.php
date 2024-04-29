@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <link rel="stylesheet" href="{{ asset('css/dataTables.dataTables.min.css') }}">
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -26,4 +27,9 @@
             @include('participants.table')
         </div>
     </div>
+
+    <script src="{{ asset('js/dataTables.min.js') }}"></script>
+    <script>
+        let table = new DataTable('#participants-table');
+    </script>
 @endsection
