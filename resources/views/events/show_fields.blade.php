@@ -39,4 +39,21 @@
         <th>イベント更新日</th>
         <td>{{ $events->updated_at }}</td>
     </tr>
+    <tr>
+        <th>編集</th>
+        <td><a href="{{ route('events.edit', [$events->id]) }}" class='btn btn-default btn-xs'>
+                <span uk-icon="icon: file-edit"></span>
+            </a></td>
+    </tr>
+    <tr>
+        <th>削除</th>
+        <td>{!! Form::open(['route' => ['events.destroy', $events->id], 'method' => 'delete']) !!}
+            {!! Form::button('<span uk-icon="icon: trash"></span>', [
+                'type' => 'submit',
+                'class' => 'btn btn-danger btn-xs',
+                'onclick' => "return confirm('本当に削除しますか?')",
+            ]) !!}
+
+            {!! Form::close() !!}</td>
+    </tr>
 </table>
