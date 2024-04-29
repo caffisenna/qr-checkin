@@ -35,8 +35,19 @@
                 <h1 uk-parallax="opacity: 0,1; y: -100,0; scale: 2,1; end: 50vh + 50%;">Scan your MyPage QR - check
                     in with ease</h1>
                 <p uk-parallax="opacity: 0,1; y: 100,0; scale: 0.5,1; end: 50vh + 50%;">QRコードでチェックインしよう!</p>
-                <a href="#" class="uk-button uk-button-primary">新規登録</a>
-                <a href="#" class="uk-button uk-button-primary">ログイン</a>
+                @auth
+                    <a href="{{ url('/home') }}" class="">Home</a>
+                @else
+                    <a href="{{ route('login') }}" class="uk-button uk-button-primary">ログイン</a>
+
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}"
+                            class="uk-button uk-button-primary">ユーザー登録</a>
+                    @endif
+                @endauth
+
+                {{-- <a href="{{ route('register') }}" class="uk-button uk-button-primary">新規登録</a>
+                <a href="#" class="uk-button uk-button-primary">ログイン</a> --}}
             </div>
         </div>
 
