@@ -20,6 +20,9 @@
                             @if ($participant->furigana)
                                 <br>{{ $participant->furigana }}
                             @endif
+                            @if ($participant->bsid)
+                                <br>{{ $participant->bsid }}
+                            @endif
                         </td>
                         <td>{{ $participant->prefecture }}</td>
                         <td>{{ $participant->district }}</td>
