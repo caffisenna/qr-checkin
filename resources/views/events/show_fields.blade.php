@@ -41,16 +41,16 @@
     </tr>
     <tr>
         <th>編集</th>
-        <td><a href="{{ route('events.edit', [$events->id]) }}" class='btn btn-default btn-xs'>
-                <span uk-icon="icon: file-edit"></span>
+        <td><a href="{{ route('events.edit', [$events->id]) }}" class='uk-button uk-button-default'>
+                <span uk-icon="icon: file-edit"></span>編集
             </a></td>
     </tr>
     <tr>
         <th>削除</th>
         <td>{!! Form::open(['route' => ['events.destroy', $events->id], 'method' => 'delete']) !!}
-            {!! Form::button('<span uk-icon="icon: trash"></span>', [
+            {!! Form::button('<span uk-icon="icon: trash"></span>削除', [
                 'type' => 'submit',
-                'class' => 'btn btn-danger btn-xs',
+                'class' => 'uk-button uk-button-danger',
                 'onclick' => "return confirm('本当に削除しますか?')",
             ]) !!}
 
