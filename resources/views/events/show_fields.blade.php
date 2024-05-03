@@ -40,6 +40,12 @@
         <td>{{ $events->updated_at }}</td>
     </tr>
     <tr>
+        <th>export</th>
+        <td><a href="{{ route('export_members', ['event_id' => $events->uuid]) }}" class="uk-button uk-button-default">
+                <span uk-icon="icon: download"></span> export</a>
+        </td>
+    </tr>
+    <tr>
         <th>編集</th>
         <td><a href="{{ route('events.edit', [$events->id]) }}" class='uk-button uk-button-default'>
                 <span uk-icon="icon: file-edit"></span>編集

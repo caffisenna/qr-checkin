@@ -41,3 +41,6 @@ Route::get('/template', [App\Http\Controllers\DownloadController::class, 'downlo
 
 // 使い方
 Route::get('/usage', [App\Http\Controllers\UsageController::class, 'usage'])->name('usage');
+
+// 参加者export
+Route::get('/export_members', [App\Http\Controllers\EventsController::class, 'export_members'])->name('export_members');

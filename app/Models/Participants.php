@@ -36,7 +36,7 @@ class Participants extends Model
         'field3' => 'string',
         'event_id' => 'string',
         'bsid' => 'string',
-        'checked_in_at' => 'date',
+        'checked_in_at' => 'datetime',
     ];
 
     public static array $rules = [

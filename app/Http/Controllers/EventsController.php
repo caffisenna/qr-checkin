@@ -8,9 +8,12 @@ use App\Http\Controllers\AppBaseController;
 use App\Models\Events;
 use App\Models\Participants;
 use App\Repositories\EventsRepository;
+use Event;
 use Illuminate\Http\Request;
 use Flash;
 use Ramsey\Uuid\Uuid;
+use Maatwebsite\Excel\Facades\Excel; // excel export用
+use App\Exports\ExcelExport; // excel export用
 
 class EventsController extends AppBaseController
 {
@@ -176,5 +179,40 @@ class EventsController extends AppBaseController
                 return back()->with('error', '予期せぬエラーが発生しました。')->withInput(request()->all());
             }
         }
+    }
+
+    public function export_members(Request $request)
+    {
+        // イベントID取得
+        $eventId = $request->input('event_id');
+
+        // 対象イベント取得
+        $event = Events::where('uuid', $eventId)->firstOrFail();
+        $eventName = $event->name;
+        $eventDate = $event->date->format('Y-m-d'); // format()
+
+        // 参加者取得
+        $members = Participants::where('event_id', $eventId)->get();
+
+        // ファイル名指定
+        $filename = 'QRチェックイン_' . $eventDate . '_' . $eventName . '.xlsx';
+
+        // ヘッダー設定
+        $headings = [
+            'ID',
+            '氏名',
+            'フリガナ',
+            '登録番号',
+            '県連',
+            '地区',
+            '役務',
+            '自由欄1',
+            '自由欄2',
+            '自由欄3',
+            'チェックイン',
+        ];
+
+        //ExcelExportにデータを渡す
+        return Excel::download(new ExcelExport($members, $headings), $filename);
     }
 }
