@@ -17,7 +17,7 @@
         @unless ($user->checked_in_at)
             <h2 class="uk-text-success">チェックイン完了!</h2>
         @else
-            <h2 class="uk-text-warning">チェックイン済みです</h2>
+            <h2 class="uk-text-warning">重複チェックインです</h2>
             <p class="uk-text-default">前回のチェックイン時刻: {{ $user->checked_in_at }}</p>
         @endunless
 
