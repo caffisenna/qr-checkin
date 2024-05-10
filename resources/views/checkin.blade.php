@@ -38,7 +38,6 @@
                     @if ($user->field1)
                         {{ $user->field1 }}
                     @endif
-                    {{ $user->field1 }}
                     @if ($user->field2)
                         <br>{{ $user->field2 }}
                     @endif
