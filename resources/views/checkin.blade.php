@@ -14,11 +14,11 @@
     </form>
 
     @if (isset($user))
-        @unless ($user->checkedin_at)
+        @unless ($user->checked_in_at)
             <h2 class="uk-text-success">チェックイン完了!</h2>
         @else
-            <h2 class="uk-text-warnint">チェックイン済みです</h2>
-            <p class="uk-text-default">前回のチェックイン時刻: {{ $user->checkedin_at }}</p>
+            <h2 class="uk-text-warning">チェックイン済みです</h2>
+            <p class="uk-text-default">前回のチェックイン時刻: {{ $user->checked_in_at }}</p>
         @endunless
 
         <table class="uk-table uk-table-striped">
