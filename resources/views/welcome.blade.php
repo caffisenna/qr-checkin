@@ -45,6 +45,8 @@
                             class="uk-button uk-button-primary">ユーザー登録</a>
                     @endif
                 @endauth
+                <a href="{{ route('usage') }}"
+                            class="uk-button uk-button-primary">使い方ガイド</a>
 
                 {{-- <a href="{{ route('register') }}" class="uk-button uk-button-primary">新規登録</a>
                 <a href="#" class="uk-button uk-button-primary">ログイン</a> --}}
