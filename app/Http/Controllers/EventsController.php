@@ -171,8 +171,9 @@ class EventsController extends AppBaseController
                         return view('checkin')->with(compact('user', 'event'));
                     }
                 } else {
+                    $event = Events::where('uuid', $event_id)->first();
                     Flash::error('対象の登録番号が見つかりません ' . $bsid);
-                    return back()->with('error', 'レコードが見つかりませんでした。')->withInput(request()->all());
+                    return view('checkin')->with(compact('event'));
                 }
             } catch (Exception $e) {
                 // その他の例外が発生した場合の処理
