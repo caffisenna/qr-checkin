@@ -14,6 +14,7 @@ use Flash;
 use Ramsey\Uuid\Uuid;
 use Maatwebsite\Excel\Facades\Excel; // excel export用
 use App\Exports\ExcelExport; // excel export用
+use Illuminate\Support\Facades\DB;
 
 class EventsController extends AppBaseController
 {
@@ -137,9 +138,17 @@ class EventsController extends AppBaseController
             return redirect(route('events.index'));
         }
 
+        // 関連する参加者削除
+        $event_id = Events::where('id', $id)->value('uuid');
+        DB::transaction(function () use ($event_id) {
+            $members = Participants::where('event_id', $event_id)->get();
+            $members->each->delete();
+        });
+
+        // イベント削除
         $this->eventsRepository->delete($id);
 
-        Flash::success('イベントを削除しました123');
+        Flash::success('イベントを削除しました');
 
         return redirect(route('events.index'));
     }

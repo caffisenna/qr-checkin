@@ -57,7 +57,7 @@
             {!! Form::button('<span uk-icon="icon: trash"></span>削除', [
                 'type' => 'submit',
                 'class' => 'uk-button uk-button-danger',
-                'onclick' => "return confirm('本当に削除しますか?')",
+                'onclick' => "return confirm('本当に削除しますか? イベントに登録されている参加者情報も削除されます。')",
             ]) !!}
 
             {!! Form::close() !!}</td>
