@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EventsController;
+use App\Http\Controllers\ParticipantsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,27 +27,27 @@ Route::group(['middleware' => 'ensureLoggedIn'], function () {
     // チェックイン必須route
 
     // イベント管理
-    Route::resource('events', App\Http\Controllers\EventsController::class);
+    Route::resource('events', EventsController::class);
 
     // 参加者管理
-    Route::resource('participants', App\Http\Controllers\ParticipantsController::class);
+    Route::resource('participants', ParticipantsController::class);
 
     // 参加者アップロードと登録
-    // Route::get('/upload', [App\Http\Controllers\ParticipantsController::class, 'showUploadForm'])->name('upload.form');
-    Route::get('participants/{event_id}/upload', [App\Http\Controllers\ParticipantsController::class, 'upload_view'])->name('upload_view');
-    Route::post('/upload', [App\Http\Controllers\ParticipantsController::class, 'upload'])->name('upload');
+    // Route::get('/upload', [ParticipantsController::class, 'showUploadForm'])->name('upload.form');
+    Route::get('participants/{event_id}/upload', [ParticipantsController::class, 'upload_view'])->name('upload_view');
+    Route::post('/upload', [ParticipantsController::class, 'upload'])->name('upload');
 
     // チェックイン
-    Route::match(['get', 'post'], '/checkin', [App\Http\Controllers\EventsController::class, 'checkin'])->name('checkin');
+    Route::match(['get', 'post'], '/checkin', [EventsController::class, 'checkin'])->name('checkin');
 
     // 確認画面
-    Route::get('/confirm', [App\Http\Controllers\ParticipantsController::class, 'confirm'])->name('confirm');
+    Route::get('/confirm', [ParticipantsController::class, 'confirm'])->name('confirm');
 
     // チェックイン取消
-    Route::get('/revert', [App\Http\Controllers\ParticipantsController::class, 'revert'])->name('revert');
+    Route::get('/revert', [ParticipantsController::class, 'revert'])->name('revert');
 
     // 参加者export
-    Route::get('/export_members', [App\Http\Controllers\EventsController::class, 'export_members'])->name('export_members');
+    Route::get('/export_members', [EventsController::class, 'export_members'])->name('export_members');
 });
 
 
