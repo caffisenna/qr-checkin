@@ -14,6 +14,7 @@ use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ParticipantImport;
+use Event;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class ParticipantsController extends AppBaseController
@@ -204,5 +205,33 @@ class ParticipantsController extends AppBaseController
         }
 
         return $data;
+    }
+
+    public function revert(Request $request)
+    {
+        // チェックイン取消処理
+        $input = $request->all();
+
+        $id = $input['id'];
+        $event_id = $input['event_id'];
+        $person = Participants::where('bsid', $id)->where('event_id', $event_id)->firstOrFail();
+
+        if ($person) {
+            // チェックインを初期化
+            $person->checked_in_at = null;
+            $person->save();
+
+            $event = Events::where('uuid', $event_id)->first();
+
+            flash::success($person->name . 'さんのチェックインを取り消しました');
+            return view('checkin')->with(compact('event'));
+        } else {
+            dd('not found');
+        }
+    }
+
+    public function confirm(Request $request)
+    {
+        dd($request);
     }
 }

@@ -32,7 +32,9 @@
                         </td>
                         <td>
                             @if ($participant->checked_in_at)
-                                済
+                                済<br>
+                                <a href="{{ route('revert', ['id' => $participant->bsid, 'event_id' => $participant->event->uuid]) }}"
+                                    class="uk-button uk-button-danger" onclick="return confirmRevert()">取消</a>
                             @else
                                 <form
                                     action="{{ route('checkin', ['bsid' => $participant->bsid, 'event_id' => $participant->event->uuid, 'redirect' => 'true']) }}"
@@ -54,3 +56,8 @@
         </div>
     </div>
 </div>
+<script>
+    function confirmRevert() {
+        return confirm('チェックインを取り消しますか?');
+    }
+</script>

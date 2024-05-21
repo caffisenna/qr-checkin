@@ -167,27 +167,47 @@ class EventsController extends AppBaseController
             $event_id = $request['event_id'];
 
             // 対象者サーチ
-            try {
-                $user = Participants::where('bsid', $bsid)->where('event_id', $event_id)->first();
-                if ($user) {
+            $user = Participants::where('bsid', $bsid)->where('event_id', $event_id)->first();
+            if ($user) {
+                if ($user->checked_in_at) {
+                    Flash::warning($user->name . 'さん 重複チェックインです');
+                    $event = Events::where('uuid', $event_id)->first();
+                    return view('confirm')->with(compact('user', 'event'));
+                } else {
                     $user->checked_in_at = now();
                     $user->save();
-                    if ($request->input('redirect') == 'true') {
-                        Flash::success($user->name . 'さんをチェックインしました');
-                        return back();
-                    } else {
-                        $event = Events::where('uuid', $event_id)->first();
-                        return view('checkin')->with(compact('user', 'event'));
-                    }
-                } else {
+                    Flash::success($user->name . 'さんをチェックインしました');
                     $event = Events::where('uuid', $event_id)->first();
-                    Flash::error('対象の登録番号が見つかりません ' . $bsid);
-                    return view('checkin')->with(compact('event'));
+                    return view('confirm')->with(compact('user', 'event'));
                 }
-            } catch (Exception $e) {
-                // その他の例外が発生した場合の処理
-                return back()->with('error', '予期せぬエラーが発生しました。')->withInput(request()->all());
+            } else {
+                $event = Events::where('uuid', $event_id)->first();
+                Flash::error('対象の登録番号が見つかりません ' . $bsid);
+                return view('confirm')->with(compact('event'));
             }
+
+            // try {
+            //     $user = Participants::where('bsid', $bsid)->where('event_id', $event_id)->first();
+            //     if ($user) {
+            //         $user->checked_in_at = now();
+            //         $user->save();
+            //         if ($request->input('redirect') == 'true') {
+            //             Flash::success($user->name . 'さんをチェックインしました');
+            //             // return back();
+            //             return view('checkin')->with(compact('user', 'event'));
+            //         } else {
+            //             $event = Events::where('uuid', $event_id)->first();
+            //             return view('checkin')->with(compact('user', 'event'));
+            //         }
+            //     } else {
+            //         $event = Events::where('uuid', $event_id)->first();
+            //         Flash::error('対象の登録番号が見つかりません ' . $bsid);
+            //         return view('checkin')->with(compact('event'));
+            //     }
+            // } catch (Exception $e) {
+            //     // その他の例外が発生した場合の処理
+            //     return back()->with('error', '予期せぬエラーが発生しました。')->withInput(request()->all());
+            // }
         }
     }
 

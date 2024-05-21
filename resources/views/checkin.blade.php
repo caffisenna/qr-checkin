@@ -12,48 +12,11 @@
         <input type="text" name="bsid" id="bsid" class="uk-input uk-form-large" onkeyup="validateAndSubmit(this)">
         {!! Form::hidden('event_id', $event->uuid) !!}
     </form>
-
-    @if (isset($user))
-        @unless ($user->checked_in_at)
-            <h2 class="uk-text-success">チェックイン完了!</h2>
-        @else
-            <h2 class="uk-text-warning">重複チェックインです</h2>
-            <p class="uk-text-default">前回のチェックイン時刻: {{ $user->checked_in_at }}</p>
-        @endunless
-
-        <table class="uk-table uk-table-striped">
-            <tr>
-                <th>お名前</th>
-                <td>{{ $user->name }}</td>
-            </tr>
-            <tr>
-                <th>登録番号</th>
-                <td>{{ $user->bsid }}</td>
-            </tr>
-            <tr>
-                <th>県連盟</th>
-                <td>{{ $user->prefecture }} {{ $user->district }}</td>
-            </tr>
-            <tr>
-                <th>役務</th>
-                <td>{{ $user->role }}</td>
-            </tr>
-            <tr>
-                <th>その他</th>
-                <td>
-                    @if ($user->field1)
-                        {{ $user->field1 }}
-                    @endif
-                    @if ($user->field2)
-                        <br>{{ $user->field2 }}
-                    @endif
-                    @if ($user->field3)
-                        <br>{{ $user->field3 }}
-                    @endif
-                </td>
-            </tr>
-        </table>
-    @endif
+    <h3>リソース</h3>
+    <ul>
+        <li><a href="{{ route('events.show', [$event->uuid]) }}">イベント詳細</a></li>
+        <li><a href="{{ route('participants.index', ['event_id' => $event->uuid]) }}">参加者一覧</a></li>
+    </ul>
 @endsection
 
 <script>

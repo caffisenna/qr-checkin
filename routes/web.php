@@ -38,6 +38,12 @@ Route::group(['middleware' => 'ensureLoggedIn'], function () {
     // チェックイン
     Route::match(['get', 'post'], '/checkin', [App\Http\Controllers\EventsController::class, 'checkin'])->name('checkin');
 
+    // 確認画面
+    Route::get('/confirm', [App\Http\Controllers\ParticipantsController::class, 'confirm'])->name('confirm');
+
+    // チェックイン取消
+    Route::get('/revert', [App\Http\Controllers\ParticipantsController::class, 'revert'])->name('revert');
+
     // 参加者export
     Route::get('/export_members', [App\Http\Controllers\EventsController::class, 'export_members'])->name('export_members');
 });
