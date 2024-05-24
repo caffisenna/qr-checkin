@@ -36,7 +36,8 @@ class ParticipantsController extends AppBaseController
         if (isset($event_id)) {
             $participants = Participants::where('event_id', $event_id)->with('event')->get();
         } else {
-            $participants = Participants::with('event')->get();
+            // whereHas('event') で relationのeventを持つ参加者レコードのみを引っ張るように修正
+            $participants = Participants::whereHas('event')->with('event')->get();
         }
 
         // $events = Events::all();
